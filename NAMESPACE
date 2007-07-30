@@ -1,0 +1,4 @@
+useDynLib(MLEcens)
+
+export(canon2real, computeMLE, plotCM, plotCDF1, plotCDF2, 
+       plotDens1, plotDens2, plotHM, plotRects, real2canon, reduc)
