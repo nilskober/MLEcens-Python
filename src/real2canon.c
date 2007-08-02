@@ -22,10 +22,11 @@ SEXP RealToCanonicalForR(SEXP RR, SEXP BB)
    double *pRR = REAL(RR);
    int    *pBB = INTEGER(BB);
    int    BBexplicit;	/* equals 1 if boundary matrix BB is given explicitly */
-   int    BBvalue[4];   /* is used when boundary matrix BB is not given explicitly */
 
    SEndPoint  *XEndPoints = Calloc(2*n, SEndPoint);
    SEndPoint  *YEndPoints = Calloc(2*n, SEndPoint);
+   int        *BBvalue    = Calloc(4, int);   
+   /* BBvalue is used when boundary matrix BB is not given explicitly */
 
    VerifyInputRectangles(RR,BB);
 
@@ -109,7 +110,10 @@ SEXP RealToCanonicalForR(SEXP RR, SEXP BB)
 
    Free(XEndPoints);
    Free(YEndPoints);
+   Free(BBvalue);
 
    UNPROTECT(numprotected);
    return Ans;
 }
+
+/* vim:set et ts=3 sw=3: */

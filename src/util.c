@@ -200,10 +200,10 @@ void RealToCanonical(int n, double *pRR, int *pBB, SCanonRect *CanonRects,
 {
    int i, BBexplicit;
 
-   SEndPoint  *XEndPoints = Calloc(2*n, SEndPoint);
-   SEndPoint  *YEndPoints = Calloc(2*n, SEndPoint);
-
-   int BBvalue[4];  /* is used when boundary matrix BB is not given explicitly */
+   SEndPoint *XEndPoints = Calloc(2*n, SEndPoint);
+   SEndPoint *YEndPoints = Calloc(2*n, SEndPoint);   
+   int       *BBvalue    = Calloc(4, int); 
+   /* is used when boundary matrix BB is not given explicitly */
 
    BBexplicit = (LengthBB==4*n); /* indicates wether BB is given explicitly */
 
@@ -285,6 +285,7 @@ void RealToCanonical(int n, double *pRR, int *pBB, SCanonRect *CanonRects,
 
     Free(XEndPoints);
     Free(YEndPoints);
+    Free(BBvalue);
 }
 
 /* Transform canonical rectangles back to original coordinates. 

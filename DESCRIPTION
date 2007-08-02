@@ -1,6 +1,6 @@
 Package: MLEcens
-Version: 0.1-0
-Date: 2007-07-30
+Version: 0.1-1
+Date: 2007-08-02
 Title: Computation of the MLE for bivariate (interval) censored data
 Author: Marloes Maathuis <marloes@u.washington.edu>
 Maintainer: Marloes Maathuis <marloes@u.washington.edu>
@@ -17,12 +17,9 @@ Description: This package contains functions to compute the nonparametric
   The methods can also be used for univariate censored data (see data set
   'cosmesis'), and for 
   censored data with competing risks (see data set 'menopause'). 
-  We also provide functions to visualize 
-  the observed data and the MLE. 
-  Please
-  feel free to contact me with questions or suggestions about this package. 
+  We also provide functions to visualize the observed data and the MLE. 
   (This package contains the functionality
   of the R-package 'bicreduc', which will no longer be maintained.)
 License: GPL (version 2 or later)
 URL: http://www.stat.washington.edu/marloes
-Packaged: Tue Jul 31 12:33:46 2007; marloes
+Packaged: Thu Aug  2 09:32:08 2007; marloes

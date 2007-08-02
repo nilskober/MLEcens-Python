@@ -22,9 +22,9 @@
 #define MemFree(p)      (free( (void *)(p) ), (p) = NULL)
 #define SQR(a)          (a*a)
 #define IsInRectangle(p,r) ( ((p)->x >  (r)->x1) && \
-                           ((p)->x <= (r)->x2) && \
-                           ((p)->y >  (r)->y1) && \
-                           ((p)->y <= (r)->y2) ) 
+                             ((p)->x <= (r)->x2) && \
+                             ((p)->y >  (r)->y1) && \
+                             ((p)->y <= (r)->y2) ) 
 
 /* Typedefs: */
 /*************/
@@ -97,4 +97,4 @@ SEXP ComuteMLEForR(SEXP RR, SEXP BB, SEXP tol);
 
 #endif /* MLECENS_H */
 
-/* vim:set et ts=3 sw=4: */
+/* vim:set et ts=3 sw=3: */

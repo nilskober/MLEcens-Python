@@ -11,7 +11,7 @@
 
 SEXP CanonicalToRealForR(SEXP InputRects, SEXP RR, SEXP BB)
 {
-   int    i, *pAnsBounds, BBexplicit, BBvalue[4];
+   int    i, *pAnsBounds, BBexplicit;
    int    numprotected=0;
    double *pAnsRects;
    char   *names[2] = {"rects","bounds"};
@@ -24,10 +24,11 @@ SEXP CanonicalToRealForR(SEXP InputRects, SEXP RR, SEXP BB)
    double *pRR         = REAL(RR);
    int    *pBB         = INTEGER(BB);
  
-   VerifyInputCanonicalRectangles(InputRects, RR, BB);
+   SEndPoint *XEndPoints = Calloc(2*n, SEndPoint);
+   SEndPoint *YEndPoints = Calloc(2*n, SEndPoint);
+   int       *BBvalue    = Calloc(4, int);
 
-   SEndPoint  *XEndPoints = Calloc(2*n, SEndPoint);
-   SEndPoint  *YEndPoints = Calloc(2*n, SEndPoint);
+   VerifyInputCanonicalRectangles(InputRects, RR, BB);
 
    /* allocate space for output */
    PROTECT(AnsRects = allocMatrix(REALSXP, m, 4));  
@@ -130,9 +131,11 @@ SEXP CanonicalToRealForR(SEXP InputRects, SEXP RR, SEXP BB)
 
    Free(XEndPoints);
    Free(YEndPoints);
+   Free(BBvalue);
 
    UNPROTECT(numprotected);
 
    return Ans;
 }
 
+/* vim:set et ts=3 sw=3: */

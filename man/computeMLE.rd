@@ -79,7 +79,7 @@ The amounts of mass assigned to the maximal intersections may be
    all mass to the upper right corners of the maximal intersections) of the MLE
    (see also \code{\link{plotCDF1}}, \code{\link{plotCDF2}}, 
    \code{\link{plotDens1}}, \code{\link{plotDens2}}). The  
-   the algorithm does not (yet) allow to account for mixture non-uniqueness. 
+   algorithm does not (yet) allow to account for mixture non-uniqueness. 
 }
 \value{A list containing the following elements:
    \item{p}{Vector of length m with positive probability masses.}
