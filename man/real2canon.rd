@@ -4,10 +4,10 @@
 \description{
       This function transforms a set of rectangles R1,..,Rn into canonical 
       rectangles R1',..,Rn' with the following properties:
-      \item R1',..Rn' have the same intersection structure as the original rectangles, i.e., 
+      (1) R1',..Rn' have the same intersection structure as the original rectangles, i.e., 
       Ri' and Rj' intersect if and only if Ri and Rj intersect.
-      \item All x-coordinates of R1',..,Rn' are distinct, and take values in {1,..,2n}.
-      \item All y-coordinates of R1',..,Rn' are distinct, and take values in {1,..,2n}.
+      (2) All x-coordinates of R1',..,Rn' are distinct, and take values in {1,..,2n}.
+      (3) All y-coordinates of R1',..,Rn' are distinct, and take values in {1,..,2n}.
 
       The function \code{\link{real2canon}} performs the inverse operation of the function 
       \code{\link{canon2real}}.
@@ -23,12 +23,12 @@
    \item{B}{
        This describes the boundaries of the rectangles (0=open or 1=closed). 
        It can be specified in three ways:
-       \item A nx4 matrix containing 0's and 1's. Each row corresponds to a
+       (1) A nx4 matrix containing 0's and 1's. Each row corresponds to a
        rectangle, and is denoted as (cx1, cx2, cy1, cy2). Here cx1 denotes the boundary 
        type of x1, cx2 denotes the boundary type of x2, etc.
-       \item A vector (cx1, cx2, cy1, cy2) containing 0's and 1's. This representation 
+       (2) A vector (cx1, cx2, cy1, cy2) containing 0's and 1's. This representation 
        can be used if all rectangles have the same type of boundaries.
-       \item A vector (c1, c2) containing 0's and 1's. This representation can be 
+       (3) A vector (c1, c2) containing 0's and 1's. This representation can be 
        used if all x and y intervals have the same type of boundaries. 
        c1 denotes the boundary type of x1 and y1, and c2 denotes the boundary type of 
        x2 and y2.
@@ -53,7 +53,6 @@
 }
 \value{A nx4 matrix of canonical observation rectangles. Each row 
       (x1,x2,y1,y2) represents a rectangle.
-  }
 }
 \references{
    M.H. Maathuis (2005). Reduction algorithm for the NPMLE for
@@ -61,7 +60,7 @@
    \emph{Journal of Computational and Graphical Statistics} \bold{14}
    252--262.
 }
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{canon2real}}}
 \examples{
 # An example with 3 arbitrarily chosen observation rectangles
@@ -74,8 +73,8 @@ par(mfrow=c(2,2))
 plotRects(R, lwd=2, main="Original rectangles")
 
 # Transform rectangles to canonical rectangles. Since the 
-#   boundaries of R1 and R2 coincide, it matters which boundaries
-#   we define to be open or closed. 
+# boundaries of R1 and R2 coincide, it matters which boundaries
+# we define to be open or closed. 
 
 # With boundary structure c(0,1), R1 and R2 do *not* overlap:
 res1 <- real2canon(R, c(0,1))    

@@ -64,7 +64,7 @@ determine the size of maximal intersections that extend to +/- infinity,
 and hence they also determine the value of the density at such maximal 
 intersections. The value of the density at such maximal intersections is
 therefore meaningless.}
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{computeMLE}}}
 \examples{
 # Load example data:
@@ -73,14 +73,15 @@ data(ex)
 # Compute the MLE:
 mle <- computeMLE(ex)
 
-# Bivariate density plots of the MLE: 
-#   The colors represent the density=p/(area of maximal intersection)
+### Bivariate density plots of the MLE:
+
+# (The colors represent the density=p/(area of maximal intersection))
 par(mfrow=c(1,1))
 plotDens2(mle, xlim=range(ex[,1:2]), ylim=range(ex[,3:4]), 
  main="Plot of the MLE. Colors represent the density.")
 plotRects(ex, add=TRUE)
 
-#   Alternative: numbers show the amount of mass in each maximal intersection
+# Alternative: numbers show the amount of mass in each maximal intersection
 plotDens2(mle, col="lightgray", xlim=range(ex[,1:2]), 
  ylim=range(ex[,3:4]), numbers=TRUE, key=FALSE, 
  main="Plot of the MLE")

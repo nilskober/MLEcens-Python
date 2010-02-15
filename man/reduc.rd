@@ -21,13 +21,13 @@
    \item{B}{
        This describes the boundaries of the rectangles (0=open or 1=closed). 
        It can be specified in three ways:
-       \item A nx4 matrix containing 0's and 1's. Each row corresponds to a
+       (1) A nx4 matrix containing 0's and 1's. Each row corresponds to a
        rectangle, and is denoted as (cx1, cx2, cy1, cy2). Here cx1 denotes the 
        boundary type of x1, cx2 denotes the boundary type of x2, etc. 
-       \item A vector (cx1, cx2, cy1, cy2) containing 0's and 1's. This 
+       (2) A vector (cx1, cx2, cy1, cy2) containing 0's and 1's. This 
        representation can be used if all rectangles have the same type of 
        boundaries.
-       \item A vector (c1, c2) containing 0's and 1's. This representation can 
+       (3) A vector (c1, c2) containing 0's and 1's. This representation can 
        be used if all x and y intervals have the same type of boundaries. 
        c1 denotes the boundary type of x1 and y1, and c2 denotes the boundary 
        type of x2 and y2.
@@ -60,11 +60,12 @@
    \code{\link{computeMLE}}.
  
    The time and space complexity of the function \code{\link{reduc}} depend 
-   on the parameters
-   'hm' and 'cm'. If hm=FALSE and cm=FALSE, then the algorithm is $O(n^2)$ 
-   in time and $O(n)$ in memory space. If hm=TRUE, then the algorithm 
-   is $O(n^2)$ in both time and space. If cm=TRUE, then the algorithm is 
-   $O(n^3)$ in time and space. 
+   on the parameters \code{hm} and \code{cm}.
+   If \code{hm}=FALSE and \code{cm}=FALSE, then the algorithm is O(n^2)
+   in time and O(n) in memory space. If \code{hm}=TRUE and \code{cm}=FALSE, 
+   then the algorithm 
+   is O(n^2) in both time and space. If \code{cm}=TRUE, then the algorithm is 
+   O(n^3) in time and space. 
 
    The function \code{\link{reduc}} 
    uses the height map algorithm
@@ -101,7 +102,7 @@ The (i,j)th element of the matrix is
    \emph{Journal of Computational and Graphical Statistics} \bold{14}
    252--262.
 }
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{real2canon}}, \code{\link{canon2real}}, 
 \code{\link{computeMLE}},
  \code{\link{plotCM}}, \code{\link{plotHM}}}

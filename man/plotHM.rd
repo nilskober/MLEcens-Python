@@ -6,9 +6,10 @@ of rectangles in a new plot, or to add it to an existing plot. The value of
 the heightmap at a point equals the number of rectangles that overlap at 
 this point.}
 \usage{
-plotHM(hm, R, grid=TRUE, grid.lty=3, grid.col="lightgray", key=TRUE, 
-       n.key=10, cex.key=0.6, numbers=FALSE, col=terrain.colors(max(hm)+1), 
-       xlim=NULL, ylim=NULL, xlab="", ylab="", main="", sub="")
+plotHM(hm, R, grid=TRUE, grid.lty=3, grid.col="lightgray", 
+       key=TRUE, n.key=10, cex.key=0.6, numbers=FALSE, 
+       col=terrain.colors(max(hm)+1), xlim=NULL, ylim=NULL, 
+       xlab="", ylab="", main="", sub="")
 }
 \arguments{
    \item{hm}{A (2n+1)x(2n+1) matrix with the values of the heightmap, 
@@ -48,7 +49,7 @@ plotHM(hm, R, grid=TRUE, grid.lty=3, grid.col="lightgray", key=TRUE,
   rectangles or maximal intersections).
 }
 \value{No value is returned.}
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{reduc}}, \code{\link{plotRects}}, 
   \code{\link{palette}}
 }

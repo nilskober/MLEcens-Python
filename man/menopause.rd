@@ -41,7 +41,7 @@ Statistics}, volume 11, number 19.}
 \references{
 Krailo and Pike (1983). Estimation of the distribution of age at 
 natural menopause from prevalence data. \emph{American Journal of 
-Epidemiology} \bf{117} 356-361.
+Epidemiology} \bold{117} 356-361.
 }
 \seealso{\code{\link{menopauseMod}}}
 \examples{

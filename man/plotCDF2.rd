@@ -10,9 +10,10 @@ the value of the MLE, and is generated using the function
 \code{\link{image}}. 
 }
 \usage{
-plotCDF2(mle, bound, col=gray(seq(0.9,0.3,len=30)), surv=FALSE, key=TRUE, 
-         n.key=10, round.key=2, cex.key=0.6, xlim=NULL, ylim=NULL, zlim=NULL, 
-         breaks=NULL, xlab="", ylab="", main="", sub="")
+plotCDF2(mle, bound, col=gray(seq(0.9,0.3,len=30)), surv=FALSE, 
+         key=TRUE, n.key=10, round.key=2, cex.key=0.6, xlim=NULL, 
+         ylim=NULL, zlim=NULL, breaks=NULL, xlab="", ylab="", 
+         main="", sub="")
 }
 \arguments{
    \item{mle}{List with elements 'p' and 'rects', as outputted by 
@@ -59,7 +60,7 @@ empty.}
    \item{sub}{Sub title of the plot. The default value is empty.}
 }
 \value{No value is returned.}
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{computeMLE}}}
 \examples{
 # Load example data:
@@ -68,25 +69,26 @@ data(ex)
 # Compute the MLE:
 mle <- computeMLE(ex)
 
-# Bivariate CDF plot of the MLE:
-#   Plot lower bound for representational non-uniqueness
+### Bivariate CDF plot of the MLE
+
+# Plot lower bound for representational non-uniqueness
 par(mfrow=c(1,1))
 plotCDF2(mle, xlim=c(min(ex[,1])-1,max(ex[,2])+1), 
  ylim=c(min(ex[,3])-1, max(ex[,4])+1), bound="l", n.key=4,
  main="Bivariate CDF plot of the MLE,
  lower bound")
 
-#   Add observation rectangles and shaded maximal intersections
+# Add observation rectangles and shaded maximal intersections
 plotRects(ex, add=TRUE) 
 plotRects(mle$rects, density=20, border=NA, add=TRUE) 
 
-#   Plot upper bound for representational non-uniqueness
+# Plot upper bound for representational non-uniqueness
 plotCDF2(mle, xlim=c(min(ex[,1])-1,max(ex[,2])+1), 
  ylim=c(min(ex[,3])-1, max(ex[,4])+1), bound="u", n.key=4,
  main="Bivariate CDF plot of the MLE,
  upper bound")
 
-#   Add observation rectangles and shaded maximal intersections
+# Add observation rectangles and shaded maximal intersections
 plotRects(ex, add=TRUE)
 plotRects(mle$rects, density=20, border=NA, add=TRUE)
 }

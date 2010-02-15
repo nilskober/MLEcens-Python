@@ -6,9 +6,10 @@
    function \code{\link{rect}}, with some pre-defined settings. 
 }
 \usage{
-plotRects(R, grid=FALSE, grid.lty=3, grid.col="lightgray", density=NULL, 
-          angle=45, col=NA, border=rainbow(nrow(R)), lty=1, lwd=1, 
-          add=FALSE, xlim=NULL, ylim=NULL, xlab="", ylab="", main="", sub="")
+plotRects(R, grid=FALSE, grid.lty=3, grid.col="lightgray", 
+          density=NULL, angle=45, col=NA, border=rainbow(nrow(R)), 
+          lty=1, lwd=1, add=FALSE, xlim=NULL, ylim=NULL, xlab="", 
+          ylab="", main="", sub="")
 }
 \arguments{
    \item{R}{A nx4 matrix of rectangles. Each row corresponds to an 
@@ -58,7 +59,7 @@ y-coordinates of the rectagnles.}
    \item{sub}{Sub title of the plot. The default value is empty.}
 }
 \value{No value is returned.}
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{rect}}, \code{\link{palette}}}
 \examples{
 n <- 10

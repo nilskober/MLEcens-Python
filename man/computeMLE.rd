@@ -20,13 +20,13 @@
    \item{B}{
        This describes the boundaries of the rectangles (0=open or 1=closed). 
        It can be specified in three ways:
-       \item A nx4 matrix containing 0's and 1's. Each row corresponds to a
+       (1) A nx4 matrix containing 0's and 1's. Each row corresponds to a
        rectangle and is denoted as (cx1, cx2, cy1, cy2), where cx1 denotes the 
        boundary type of x1, cx2 denotes the boundary type of x2, etc. 
-       \item A vector (cx1, cx2, cy1, cy2) containing 0's and 1's. This 
+       (2) A vector (cx1, cx2, cy1, cy2) containing 0's and 1's. This 
        representation can be used if all rectangles have the same type of 
        boundaries.
-       \item A vector (c1, c2) containing 0's and 1's. This representation can 
+       (3) A vector (c1, c2) containing 0's and 1's. This representation can 
        be used if all x and y intervals have the same type of boundaries. 
        c1 denotes the boundary type of x1 and y1, and c2 denotes the boundary 
        type of x2 and y2.
@@ -102,14 +102,14 @@ specified in the same way as \code{B}.}
    M.H. Maathuis (2003). Nonparametric maximum likelihood estimation 
    for bivariate censored data. Master's thesis, Delft University of 
    Technology, The Netherlands. Available at 
-   http://www.stat.washington.edu/marloes/papers.
+   http://stat.ethz.ch/~maathuis/papers/.
 
    M.H. Maathuis (2005). Reduction algorithm for the NPMLE for
    the distribution function of bivariate interval censored data.
    \emph{Journal of Computational and Graphical Statistics} \bold{14}
    252--262.
 }
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}. Part of the 
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}. Part of the 
  code for the optimization step is adapted from code that was written by Piet 
  Groeneboom.}
 \seealso{\code{\link{reduc}}, \code{\link{plotCDF1}}, \code{\link{plotCDF2}},
@@ -120,60 +120,60 @@ data(ex)
 mle <- computeMLE(ex)
 par(mfrow=c(2,2))
 
-# Bivariate density plots of the MLE:
+#### Bivariate density plots of the MLE:
 
-#   The colors represent the density=p/(area of maximal intersection)
+# The colors represent the density=p/(area of maximal intersection)
 plotDens2(mle, xlim=range(ex[,1:2]), ylim=range(ex[,3:4]), 
  main="Bivariate density plot of the MLE")
 plotRects(ex, add=TRUE)
 
-#   Alternative: numbers represent the mass p in the maximal intersections
+# Alternative: numbers represent the mass p in the maximal intersections
 plotDens2(mle, xlim=range(ex[,1:2]), ylim=range(ex[,3:4]), 
  col="lightgray", main="Bivariate density plot of the MLE", 
  key=FALSE, numbers=TRUE)
 plotRects(ex, add=TRUE)
 
-# Univariate density plots of the MLE:
+#### Univariate density plots of the MLE:
 
-#   Plot univariate density for X
+# Plot univariate density for X
 plotDens1(mle, margin=1, xlim=range(ex[,1:2]), 
  main="Marginal density plot, 
  x-margin", xlab="x", ylab=expression(f[X](x)))
 
-#   Plot univariate density for Y
+# Plot univariate density for Y
 plotDens1(mle, margin=2, xlim=range(ex[,3:4]), 
  main="Marginal density plot, 
  y-margin", xlab="y", ylab=expression(f[Y](y))) 
 
-# Bivariate CDF plots of the MLE:
+### Bivariate CDF plots of the MLE:
 
-#   Plot lower bound for representational non-uniqueness
+# Plot lower bound for representational non-uniqueness
 plotCDF2(mle, xlim=c(min(ex[,1])-1,max(ex[,2])+1), 
  ylim=c(min(ex[,3])-1, max(ex[,4])+1), bound="l", n.key=4,
  main="Bivariate CDF plot of the MLE,
  lower bound")
 
-#   Add observation rectangles and shaded maximal intersections
+# Add observation rectangles and shaded maximal intersections
 plotRects(ex, add=TRUE) 
 plotRects(mle$rects, density=20, border=NA, add=TRUE) 
 
-#   Plot upper bound for representational non-uniqueness
+# Plot upper bound for representational non-uniqueness
 plotCDF2(mle, xlim=c(min(ex[,1])-1,max(ex[,2])+1), 
  ylim=c(min(ex[,3])-1, max(ex[,4])+1), bound="u", n.key=4,
- main="Bivariate CDF plot of the MLE,
+ main="Bivariate CDF plot of the MLE, 
  upper bound")
 
-#   Add observation rectangles and shaded maximal intersections
+# Add observation rectangles and shaded maximal intersections
 plotRects(ex, add=TRUE)
 plotRects(mle$rects, density=20, border=NA, add=TRUE)
 
-# Marginal CDF plots of the MLE:
+### Marginal CDF plots of the MLE:
 
-#   Plot marginal CDF for X
+# Plot marginal CDF for X
 plotCDF1(mle, margin=1, xlim=c(min(ex[,1])-1,max(ex[,2])+1), 
  bound="b", xlab="x", ylab="P(X<=x)", main="MLE for P(X<=x)")
 
-#   Plot marginal CDF for Y
+# Plot marginal CDF for Y
 plotCDF1(mle, margin=2, xlim=c(min(ex[,3])-1,max(ex[,4])+1), 
  bound="b", xlab="y", ylab="P(Y<=y)", main="MLE for P(Y<=y)")
 }

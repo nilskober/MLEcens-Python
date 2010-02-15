@@ -64,7 +64,7 @@ bound should be plotted. The default value is "b".
    \item{sub}{Sub title of the plot.}
 }
 \value{No value is returned.}
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{computeMLE}}}
 \examples{
 # Load example data:

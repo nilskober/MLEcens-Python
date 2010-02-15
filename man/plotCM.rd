@@ -33,7 +33,7 @@ plotCM(cm, col=c("white","black"), at.x=NULL, at.y=NULL,
    \item{sub}{Sub-title of the plot. The default value is empty.}
 }
 \value{No value is returned.}
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{reduc}}}
 \examples{
 # Load example data and plot observation rectangles

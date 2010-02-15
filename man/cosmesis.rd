@@ -45,15 +45,15 @@ mle1 <- computeMLE(cosmesis1)
 # Plot MLEs
 par(mfrow=c(2,2))
 
-#   Density for women who were treated with radio theorapy alone
+# Density for women who were treated with radio theorapy alone
 plotDens1(mle0, margin=1, col="black", main="Density for time to breast   
  retraction (RT alone)", xlab="time (months)", ylab="density")
 
-#   Density for women who were treated with radio therapy + chemo therapy
+# Density for women who were treated with radio therapy + chemo therapy
 plotDens1(mle1, margin=1, col="red", main="Density for time to breast
  retraction (RT+CT)", xlab="time (months)", ylab="density")
 
-#   Survival functions for both groups, plus legend
+# Survival functions for both groups, plus legend
 plotCDF1(mle0, margin=1, surv=TRUE, col="black", 
  main="Survival functions", xlab="time (months)", ylab="probability")
 plotCDF1(mle1, margin=1, surv=TRUE, col="red", add=TRUE)

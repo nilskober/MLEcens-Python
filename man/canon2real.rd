@@ -23,12 +23,12 @@ Each row corresponds to a rectangle, represented as (x1,x2,y1,y2).
    \item{B}{
        This describes the boundaries of the original rectangles 
 (0=open or 1=closed). It can be specified in three ways:
-       \item A nx4 matrix containing 0's and 1's. Each row corresponds to a
+       (1) A nx4 matrix containing 0's and 1's. Each row corresponds to a
 rectangle and is denoted as (cx1, cx2, cy1, cy2), where cx1 denotes the 
 boundary type of x1, cx2 denotes the boundary type of x2, etc. 
-       \item A vector (cx1, cx2, cy1, cy2) containing 0's and 1's. This 
+       (2) A vector (cx1, cx2, cy1, cy2) containing 0's and 1's. This 
 representation can be used if all rectangles have the same type of boundaries. 
-       \item A vector (c1, c2) containing 0's and 1's. This representation 
+       (3) A vector (c1, c2) containing 0's and 1's. This representation 
 can be used if all x and y intervals have the same type of boundaries. c1 
 denotes the boundary type of x1 and y1, and c2 denotes the boundary type of
 x2 and y2.
@@ -65,7 +65,7 @@ input rectangles. Each row (x1,x2,y1,y2) represents a rectangle.
    \emph{Journal of Computational and Graphical Statistics} \bold{14}
    252--262.
 }
-\author{Marloes Maathuis: \email{marloes@u.washington.edu}}
+\author{Marloes Maathuis: \email{maathuis@stat.math.ethz.ch}}
 \seealso{\code{\link{real2canon}}}
 \examples{
 # An example with 3 arbitrarily chosen observation rectangles
@@ -86,8 +86,8 @@ res2 <- canon2real(res1, R, c(0,1))
 plotRects(res2$rects, lwd=2, main="Original rectangles")
    
 # Only transform rectangle (2,3)x(4,5), which is the  
-#   the intersection of the canonical rectangles R1 and R3. 
-#   The result is the intersection of the original rectangles R1 and R3. 
+# the intersection of the canonical rectangles R1 and R3. 
+# The result is the intersection of the original rectangles R1 and R3. 
 R.1.3 <- matrix(c(2,3,4,5),nrow=1)
 res3 <- canon2real(R.1.3, R, c(0,1))
 res3$rects
