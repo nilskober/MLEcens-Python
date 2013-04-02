@@ -1,6 +1,6 @@
 /* Util.c: collection of functions that are used by the other routines */
 
-#include <R.h>   
+#include <R.h>
 #include <Rinternals.h>
 
 #include "MLEcens.h"
@@ -14,7 +14,7 @@ void VerifyInputRectangles(SEXP RR, SEXP BB)
    int *pBB;
 
    n = nrows(RR);
-  
+
    pRR = REAL(RR);
    pBB = INTEGER(BB);
 
@@ -38,26 +38,26 @@ void VerifyInputRectangles(SEXP RR, SEXP BB)
       else if (pRR[i] == pRR[i+n])
       {
          if (isMatrix(BB))
-         { 
+         {
             if (pBB[i]!=1 || pBB[i+n]!=1)
                error("x1==x2 in R[%d,], so boundaries for these endpoints need to be specified as 1=closed\n", i+1);
          }
        else if (pBB[0]!=1 || pBB[1]!=1)
             error("x1==x2 in R[%d,], so boundaries for these endpoints need to be specified as 1=closed\n", i+1);
-      } 
+      }
 
       if (pRR[i+2*n] > pRR[i+3*n])
          error("invalid argument 'R': y1 is larger than y2 in R[%d,]\n", i+1);
       else if (pRR[i+2*n] == pRR[i+3*n])
       {
-         if (isMatrix(BB)) 
-         {   
+         if (isMatrix(BB))
+         {
             if (pBB[i+2*n]!=1 || pBB[i+3*n]!=1)
                error("y1==y2 in R[%d,],so boundaries for these endpoints need to be specified as 1=closed\n", i+1);
          }
          else if (pBB[length(BB)-2]!=1 || pBB[length(BB)-1]!=1)
             error("y1==y2 in R[%d,], so boundaries for these endpoints need to be specified as 1=closed\n", i+1);
-      } 
+      }
    }
 
    for (i=0; i<length(BB); i++)
@@ -79,7 +79,7 @@ void VerifyInputCanonicalRectangles(SEXP CanonRects, SEXP RR, SEXP BB)
    pCanonRects = INTEGER(CanonRects);
    pRR         = REAL(RR);
    pBB         = INTEGER(BB);
-   
+
    if (!isMatrix(CanonRects) || ncols(CanonRects)!=4)
       error("invalid argument 'Rcanon': it must be a matrix with 4 columns\n");
 
@@ -111,13 +111,13 @@ void VerifyInputCanonicalRectangles(SEXP CanonRects, SEXP RR, SEXP BB)
       else if (pRR[i] == pRR[i+n])
       {
          if (isMatrix(BB))
-         { 
-            if (pBB[i]!=1 || pBB[i+n]!=1)            
+         {
+            if (pBB[i]!=1 || pBB[i+n]!=1)
                error("x1==x2 in R[%d,], so boundaries for these endpoints need to be specified as 1=closed\n", i+1);
          }
          else if (pBB[0]!=1 || pBB[1]!=1)
             error("x1==x2 in R[%d,], so boundaries for these endpoints need to be specified as 1=closed\n", i+1);
-      } 
+      }
 
       if (pRR[i+2*n] > pRR[i+3*n])
          error("invalid argument 'R': y1 is larger than y2 in R[%d,]\n", i+1);
@@ -130,7 +130,7 @@ void VerifyInputCanonicalRectangles(SEXP CanonRects, SEXP RR, SEXP BB)
          }
          else if (pBB[length(BB)-2]!=1 || pBB[length(BB)-1]!=1)
             error("y1==y2 in R[%d,] so boundaries for these endpoints need to be specified as 1=closed\n", i+1);
-      } 
+      }
    }
 
    for (i=0; i<length(BB); i++)
@@ -147,12 +147,12 @@ void VerifyInputCanonicalRectangles(SEXP CanonRects, SEXP RR, SEXP BB)
  */
 int CompareEndpoints (const SEndPoint *A, const SEndPoint *B)
 {
-   if (A->value != B->value) 
+   if (A->value != B->value)
       return (A->value < B->value);
 
    if (A->left == B->left && A->closed == B->closed)
       return (A->index < B->index);
-      
+
    if (A->left != B->left && A->closed != B->closed)
       return (B->left);
 
@@ -162,7 +162,7 @@ int CompareEndpoints (const SEndPoint *A, const SEndPoint *B)
 
 /* Function to compare endpoints A and B.
  * If elem1<elem2, then return value is -1, otherwise return value is 1.
- * This function uses CompareEndpoints() to do the actual comparison, 
+ * This function uses CompareEndpoints() to do the actual comparison,
  * and it is used in RealToCanonical().
  */
 int SortEndpoints(const void *A, const void *B)
@@ -174,35 +174,35 @@ int SortEndpoints(const void *A, const void *B)
 }
 
 
-/* Transform real rectangles to canonical rectangles. 
- * Input: 
+/* Transform real rectangles to canonical rectangles.
+ * Input:
  *   n: Number of observation rectangles
  *   pRR: Vector of length 4*n with coordinates of the observation rectangles
  *        The coordinates x1,x2,y1,y2 of the ith rectangle are given by
  *        pRR[i+0*n], pRR[i+1*n], pRR[i+2*n], pRR[i+3*n]
- *   pBB: Vector of length 2, 4, or 4*n with the boundary structure of the observation 
- *         rectangles (0=open, 1=closed). 
+ *   pBB: Vector of length 2, 4, or 4*n with the boundary structure of the observation
+ *         rectangles (0=open, 1=closed).
  *        - if length=4*n, pBB represents a 4xn matrix, stored in the same way as R
  *        - if length=4, all observation rectangles have the same boundary structure
  *        - if length=2, all x-intervals and all y-intervals have the same boundary structure
- *    LengthBB: total length of pBB (4*n, 4, or 2). This tells us how pBB is specified. 
+ *    LengthBB: total length of pBB (4*n, 4, or 2). This tells us how pBB is specified.
  * Output:
  *   CanonRects: nx4 matrix of canonical rectangles, stored as *SCanonRect
- *   rx: vector of length 2*n containing the indices of the rectangles 
+ *   rx: vector of length 2*n containing the indices of the rectangles
  *        corresponding to the sorted x-coordinates
- *    ry: vector of length 2*n containing the indices of the rectangles 
+ *    ry: vector of length 2*n containing the indices of the rectangles
  *        corresponding to the sorted y-coordinates
- *    lb: vector of length 2*n indicating the left/right boundaries of the 
+ *    lb: vector of length 2*n indicating the left/right boundaries of the
  *        sorted x-coordinates (1=left, 0=right)
  */
-void RealToCanonical(int n, double *pRR, int *pBB, SCanonRect *CanonRects, 
+void RealToCanonical(int n, double *pRR, int *pBB, SCanonRect *CanonRects,
            int *rx, int *ry, int *lb, int LengthBB)
 {
    int i, BBexplicit;
 
    SEndPoint *XEndPoints = Calloc(2*n, SEndPoint);
-   SEndPoint *YEndPoints = Calloc(2*n, SEndPoint);   
-   int       *BBvalue    = Calloc(4, int); 
+   SEndPoint *YEndPoints = Calloc(2*n, SEndPoint);
+   int       *BBvalue    = Calloc(4, int);
    /* is used when boundary matrix BB is not given explicitly */
 
    BBexplicit = (LengthBB==4*n); /* indicates wether BB is given explicitly */
@@ -214,7 +214,7 @@ void RealToCanonical(int n, double *pRR, int *pBB, SCanonRect *CanonRects,
       BBvalue[2] = pBB[LengthBB-2+0];
       BBvalue[3] = pBB[LengthBB-2+1];
    }
-   
+
    /* Separate observations into X and Y endpoints.
    * Note that I have used more explicit names than in the paper,
    * and instead of k=1,2 to indicate left,right endpoint, I now use left=1,0.
@@ -288,35 +288,35 @@ void RealToCanonical(int n, double *pRR, int *pBB, SCanonRect *CanonRects,
     Free(BBvalue);
 }
 
-/* Transform canonical rectangles back to original coordinates. 
- * Input: 
+/* Transform canonical rectangles back to original coordinates.
+ * Input:
  *   CanonRects: matrix of canonical rectangles, stored as SCanonRect
  *   mm: number of rows of CanonRects
- *   m: number of canonical rectangles that are to be transformed  
- *   ind: if (m<mm), ind is a vector of length m indicating which 
+ *   m: number of canonical rectangles that are to be transformed
+ *   ind: if (m<mm), ind is a vector of length m indicating which
  *        canonical rectangles are to be transformed
  *   n: number of original rectangles
  *   pRR: Vector of length 4*n with coordinates of the observation rectangles
  *        The coordinates x1,x2,y1,y2 of the ith rectangle are given by
  *        pRR[i+0*n], pRR[i+1*n], pRR[i+2*n], pRR[i+3*n]
- *   pBB: Vector of length 2, 4, or 4*n with the boundary structure of the observation 
- *         rectangles (0=open, 1=closed). 
+ *   pBB: Vector of length 2, 4, or 4*n with the boundary structure of the observation
+ *         rectangles (0=open, 1=closed).
  *        - if length=4*n, pBB represents a 4xn matrix, stored in the same way as R
  *        - if length=4, all observation rectangles have the same boundary structure
  *        - if length=2, all x-intervals and all y-intervals have the same boundary structure
  *   BBexplicit: indicates whether pBB is specified as a matrix
- *   rx: vector of length 2*n containing the indices of the rectangles 
+ *   rx: vector of length 2*n containing the indices of the rectangles
  *        corresponding to the sorted x-coordinates
- *    ry: vector of length 2*n containing the indices of the rectangles 
+ *    ry: vector of length 2*n containing the indices of the rectangles
  *        corresponding to the sorted y-coordinates
  * Output:
- *   pAnsRects: vector of length 4*m with the real coordinates of the 
+ *   pAnsRects: vector of length 4*m with the real coordinates of the
  *              canonical rectangles that were to be transformed (stored as pRR)
- *   pAnsBounds: boundary structure of pAnsRects, 
- *               specified in the same way as pBB 
+ *   pAnsBounds: boundary structure of pAnsRects,
+ *               specified in the same way as pBB
  */
-void CanonicalToReal(SCanonRect *CanonRects, int mm, int m, int *ind,  
-                int n, double *pRR, int *pBB, int BBexplicit, int *rx, int *ry, 
+void CanonicalToReal(SCanonRect *CanonRects, int mm, int m, int *ind,
+                int n, double *pRR, int *pBB, int BBexplicit, int *rx, int *ry,
                 double *pAnsRects, int *pAnsBounds)
 {
    int i;
@@ -368,29 +368,29 @@ void CanonicalToReal(SCanonRect *CanonRects, int mm, int m, int *ind,
 
 
 /* LAPACK function used in SolveSymmetricLinearSystem() */
-void F77_NAME (dspsv)(char *, int *, int *, double *, int *, double *, 
+void F77_NAME (dspsv)(char *, int *, int *, double *, int *, double *,
                  int *, int *);
 
 
 /* Compute convex combination of two arrays of doubles of length n:
- *   result = p*array1 + (1-p)*array2 
+ *   result = p*array1 + (1-p)*array2
  */
-void Convex_Comb(int ndata, double p, double array1[], double array2[], 
+void Convex_Comb(int ndata, double p, double array1[], double array2[],
                double result[])
 {
    int i;
 
    for (i=0; i<ndata; i++)
       result[i] = p*array1[i] + (1-p)*array2[i];
-}      
+}
 
 
 /* Solve linear system A*X = B using the FORTRAN LAPACK routines DSPSV
  * A is a SYMMETRIC SQUARE matrix in PACKED STORAGE
- *   Its size is nrowA*(nrowA+1)/2, its upper diagonal matrix 
+ *   Its size is nrowA*(nrowA+1)/2, its upper diagonal matrix
  *     (including the diagonal) is stored column wise
- *   On exit, A contains the block diagonal matrix and multipliers 
- *      from the factorization of A 
+ *   On exit, A contains the block diagonal matrix and multipliers
+ *      from the factorization of A
  * B is an (nrowA*ncolB) matrix of doubles
  *   On exit, B contains the solution matrix
  * dummy is integer array of length nrowA, that is needed in the function dspsv
@@ -401,13 +401,12 @@ void SolveSymmetricLinearSystem(double *A, int nrowA, double *B, int ncolB, int*
    int info;
    char uplo='U';
 
-   F77_CALL (dspsv) (&uplo, &nrowA, &ncolB, A, dummy, B, 
+   F77_CALL (dspsv) (&uplo, &nrowA, &ncolB, A, dummy, B,
                &nrowA, &info);
 
    if (info!=0)
    {
-      puts("Error in SolveSymmetricLinearSystem\n");
-      exit(1);
+      Rf_error("Error in SolveSymmetricLinearSystem");
    }
 }
 

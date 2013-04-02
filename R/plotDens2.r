@@ -74,10 +74,10 @@ intersectsions have equal x-coordinates or equal y-coordinates")
         key.x2 <- xmax
         if (densmin==densmax){
             rect(key.x1, ymin, key.x2, ymax, col=col[1], border="black")
-            axis(4, at=mean(c(ymin,ymax)), label=round(breaks, round.key))
+            axis(4, at=mean(c(ymin,ymax)), labels=round(breaks, round.key))
         } else if (ncol==1){
             rect(key.x1, ymin, key.x2, ymax, col=col, border="black")
-            axis(4, at=c(ymin,ymax), label=round(c(densmin,densmax),round.key))
+            axis(4, at=c(ymin,ymax), labels=round(c(densmin,densmax),round.key))
         } else {
             key.y <- ymin + c(0:ncol) * (ymax - ymin)/ncol
             rect(rep(key.x1, ncol), key.y[1:ncol], rep(key.x2, ncol), 
@@ -89,7 +89,7 @@ intersectsions have equal x-coordinates or equal y-coordinates")
                 a <- ceiling(log2(ncol/(1.5 * n.key)))
                 ind.label <- seq(from = 2^a, by = 2^a, to = ncol+1)
             }
-            axis(4, at = key.y[ind.label], label = round(breaks, 
+            axis(4, at = key.y[ind.label], labels = round(breaks, 
                  round.key)[ind.label])
         }
     }
