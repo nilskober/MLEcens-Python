@@ -116,7 +116,8 @@ SEXP ReductionStepForR(SEXP RR, SEXP BB, SEXP hm, SEXP cm)
             if ( (h[k+1]<h[k]) && (b>-1) )
             {
                /* 14. if ( e_i>-1 for i=b,..,k); */
-               for (i=b; (i<=k && e[i]>-1); i++);      /* empty loop */
+               for (i=b; (i<=k && e[i]>-1); i++)
+			   {}  /* empty loop to advance i */
                if (i>k)
                {
                   if (m == MaxNrMIs) 
@@ -155,27 +156,26 @@ SEXP ReductionStepForR(SEXP RR, SEXP BB, SEXP hm, SEXP cm)
          if (b>-1)
          {
             /* 22. if (e_i>-1 for i=b,...,k) */
-            for (i=b; (i<=k && e[i]>-1); i++);
+            for (i=b; (i<=k && e[i]>-1); i++)
+			{} /* empty loop to advance i */
+            if (i>k)
             {
-               if (i>k)
+               if (m == MaxNrMIs) 
                {
-                  if (m == MaxNrMIs) 
-                  {
-                     MaxNrMIs = 2*MaxNrMIs;
-                     CanonMaxIntersections = Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect); 
-                  }
+                  MaxNrMIs = 2*MaxNrMIs;
+                  CanonMaxIntersections = Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect); 
+               }
 
-                  /* 23. m := m + 1;  Am := (x_{1,e_k}, j, b, k+1) */
-                  CanonMaxIntersections[m].x1 = CanonObsRectangles[e[k]].x1;
-                  CanonMaxIntersections[m].x2 = j;
-                  CanonMaxIntersections[m].y1 = b;
-                  CanonMaxIntersections[m].y2 = k+1;         
-                  m += 1;
+               /* 23. m := m + 1;  Am := (x_{1,e_k}, j, b, k+1) */
+               CanonMaxIntersections[m].x1 = CanonObsRectangles[e[k]].x1;
+               CanonMaxIntersections[m].x2 = j;
+               CanonMaxIntersections[m].y1 = b;
+               CanonMaxIntersections[m].y2 = k+1;         
+               m += 1;
                   
-                  /* 24. e_{b} := -1 */
-                  e[b] = -1;
-               }   
-            }
+               /* 24. e_{b} := -1 */
+               e[b] = -1;
+            }   
          }
 
          /* 25. for k = (y_{1,rx_j}) to (y_{2,rx_j} - 1) do */

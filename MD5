@@ -1,5 +1,5 @@
 e93733b2df616b4dd0fd5ef7a776cdcd *COPYING
-e527cf9345e86002db11422c0fe10c33 *DESCRIPTION
+3be526ddd60a34dd76326307a9fb8557 *DESCRIPTION
 df36fd6d5a6b70d02fd70afe4af6cb1b *NAMESPACE
 388a93ad6a6b19388cd7b5946181f076 *R/canon2real.r
 2effb2f56b94b8c4bd73a2598e828614 *R/computeMLE.r
@@ -45,5 +45,5 @@ d94cdcc4ff1029318bf31764cc5dd0f4 *src/MLEcens_init.c
 4504bbee3fcc47f2d5f2f3e9e0357c97 *src/canon2real.c
 73fdeac9bc24c94118c93b9470c404d7 *src/computeMLE.c
 f680e0a7ef8c2efb3b85906654544306 *src/real2canon.c
-da291a05284715ccbf986071c7bf8fb4 *src/reduc.c
+86a967fbd31174ae9e007a14d88f1265 *src/reduc.c
 95d36dc7f35c337f932df6587bc18945 *src/util.c

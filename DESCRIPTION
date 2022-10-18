@@ -1,9 +1,9 @@
 Package: MLEcens
-Version: 0.1-5
-Date: 2022-03-31
+Version: 0.1-7
+Date: 2022-10-18
 Title: Computation of the MLE for Bivariate Interval Censored Data
 Authors@R: person("Marloes", "Maathuis", role= c("aut", "cre"), 
-   email= "maathuis@stat.math.ethz.ch")
+   email= "marloesmaathuis@gmail.com")
 Depends:
 Description: We provide functions to compute the nonparametric 
   maximum likelihood estimator (MLE) for 
@@ -20,8 +20,8 @@ Description: We provide functions to compute the nonparametric
 License: GPL (>= 2)
 URL: http://stat.ethz.ch/~maathuis/
 NeedsCompilation: yes
-Packaged: 2022-03-31 11:38:13 UTC; mmarloes
+Packaged: 2022-10-18 08:08:32 UTC; mmarloes
 Author: Marloes Maathuis [aut, cre]
-Maintainer: Marloes Maathuis <maathuis@stat.math.ethz.ch>
+Maintainer: Marloes Maathuis <marloesmaathuis@gmail.com>
 Repository: CRAN
-Date/Publication: 2022-03-31 12:50:05 UTC
+Date/Publication: 2022-10-18 14:18:03 UTC
