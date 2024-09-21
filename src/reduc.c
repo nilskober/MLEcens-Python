@@ -16,20 +16,20 @@
 SEXP ReductionStepForR(SEXP RR, SEXP BB, SEXP hm, SEXP cm)
 {
    int n = nrows(RR);
-   int *h  = Calloc(2*n, int);   /* value of height map, initialized at zero */
-   int *e  = Calloc(2*n, int);   /* value of last entered rectangle */
-   int *rx = Calloc(2*n, int);   /* indices of rectangles corresponding to 
+   int *h  = R_Calloc(2*n, int);   /* value of height map, initialized at zero */
+   int *e  = R_Calloc(2*n, int);   /* value of last entered rectangle */
+   int *rx = R_Calloc(2*n, int);   /* indices of rectangles corresponding to 
                                   *   sorted X endpoints */
-   int *ry = Calloc(2*n, int);   /* indices of rectangles corresponding to 
+   int *ry = R_Calloc(2*n, int);   /* indices of rectangles corresponding to 
                                   *   sorted Y endpoints */
-   int *lb = Calloc(2*n, int);   /* left/right boundary (1/0) */
+   int *lb = R_Calloc(2*n, int);   /* left/right boundary (1/0) */
 
    /* canonical observation rectangles */
-   SCanonRect *CanonObsRectangles    = Calloc(n, SCanonRect);  
+   SCanonRect *CanonObsRectangles    = R_Calloc(n, SCanonRect);  
 
    /* canonical maximal intersections */
    int MaxNrMIs = n;  /* starting value, will be increased if necessary */
-   SCanonRect *CanonMaxIntersections = Calloc(MaxNrMIs, SCanonRect); 
+   SCanonRect *CanonMaxIntersections = R_Calloc(MaxNrMIs, SCanonRect); 
 
    /* variables for input */
    double *pRR = REAL(RR);
@@ -123,7 +123,7 @@ SEXP ReductionStepForR(SEXP RR, SEXP BB, SEXP hm, SEXP cm)
                   if (m == MaxNrMIs) 
                   {
                      MaxNrMIs = 2*MaxNrMIs;
-                     CanonMaxIntersections = Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect);   
+                     CanonMaxIntersections = R_Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect);   
                   }
 
                   /* 15. A_m := (x_{1,e_k}, j, b, k+1); m := m+1 */
@@ -163,7 +163,7 @@ SEXP ReductionStepForR(SEXP RR, SEXP BB, SEXP hm, SEXP cm)
                if (m == MaxNrMIs) 
                {
                   MaxNrMIs = 2*MaxNrMIs;
-                  CanonMaxIntersections = Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect); 
+                  CanonMaxIntersections = R_Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect); 
                }
 
                /* 23. m := m + 1;  Am := (x_{1,e_k}, j, b, k+1) */
@@ -246,13 +246,13 @@ SEXP ReductionStepForR(SEXP RR, SEXP BB, SEXP hm, SEXP cm)
    UNPROTECT(numprotected);
 
    /* release memory of all intermediate data structures */
-   Free(h);
-   Free(e);
-   Free(rx);
-   Free(ry);
-   Free(lb);
-   Free(CanonMaxIntersections);
-   Free(CanonObsRectangles);
+   R_Free(h);
+   R_Free(e);
+   R_Free(rx);
+   R_Free(ry);
+   R_Free(lb);
+   R_Free(CanonMaxIntersections);
+   R_Free(CanonObsRectangles);
 
    return Ans;
 }

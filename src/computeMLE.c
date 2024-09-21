@@ -598,7 +598,7 @@ void ComputeAlphasIQM (int ndata, SCanonRect *R, double *w, int m, SIntPoint *t,
    int i, j;
    double *W;
    
-   W = Calloc(m*(m+1)/2, double);
+   W = R_Calloc(m*(m+1)/2, double);
    
    /* compute matrix a, based on vectors R, w and t */
    ComputeW(ndata,R,w,m,t,W);
@@ -619,7 +619,7 @@ void ComputeAlphasIQM (int ndata, SCanonRect *R, double *w, int m, SIntPoint *t,
    SolveSymmetricLinearSystem(W,m,d_dummy_mm,1,i_dummy_mm);
    
    MemCopy(alpha,d_dummy_mm,m);
-   Free(W);
+   R_Free(W);
 }
 
 /* Algorithm to find maximal intersections: the areas of possible mass support.
@@ -642,15 +642,15 @@ void HeightMapAlgorithmCanonical(int n, SCanonRect *CanonObsRectangles, int *rx,
    /* allocate space for canonical maximal intersections */
    int MaxNrMIs = n; /* starting size for nr of CanonMaxIntersections */
    
-   int *h = Calloc(2*n, int); /* value of height map, initialized at zero */
-   int *e = Calloc(2*n, int); /* value of last entered rectangle */
+   int *h = R_Calloc(2*n, int); /* value of height map, initialized at zero */
+   int *e = R_Calloc(2*n, int); /* value of last entered rectangle */
    
    int b, m;
    int i, j, k;
    
    SCanonRect *CanonMaxIntersections = *CanonMaxInt;
    
-   CanonMaxIntersections = Calloc(MaxNrMIs, SCanonRect); /* starting size, will be increased if necessary */
+   CanonMaxIntersections = R_Calloc(MaxNrMIs, SCanonRect); /* starting size, will be increased if necessary */
    
    /* 3. m := 0 */
    m = 0;
@@ -698,7 +698,7 @@ void HeightMapAlgorithmCanonical(int n, SCanonRect *CanonObsRectangles, int *rx,
                   if (m == MaxNrMIs)
                   {
                      MaxNrMIs = 2*MaxNrMIs;
-                     CanonMaxIntersections = Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect);	
+                     CanonMaxIntersections = R_Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect);	
                   }
                   /* 15. A_m := (x_{1,e_k}, j, b, k+1); m := m+1 */
                   CanonMaxIntersections[m].x1 = CanonObsRectangles[e[k]].x1;
@@ -736,7 +736,7 @@ void HeightMapAlgorithmCanonical(int n, SCanonRect *CanonObsRectangles, int *rx,
                if (m == MaxNrMIs) 
                {
                   MaxNrMIs = 2*MaxNrMIs;
-                  CanonMaxIntersections = Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect);	
+                  CanonMaxIntersections = R_Realloc(CanonMaxIntersections, MaxNrMIs, SCanonRect);	
                }
                /* 23. m := m + 1; Am := (x_{1,e_k}, j, b, k+1) */
                CanonMaxIntersections[m].x1 = CanonObsRectangles[e[k]].x1;
@@ -764,8 +764,8 @@ void HeightMapAlgorithmCanonical(int n, SCanonRect *CanonObsRectangles, int *rx,
    *CanonMaxInt = CanonMaxIntersections; 
    
    /* release memory of all intermediate data structures */
-   Free(h);
-   Free(e);
+   R_Free(h);
+   R_Free(e);
 }
 
 
@@ -781,21 +781,21 @@ void MLE_IQM(int ndata, SCanonRect *R, int mm, SIntPoint *tt,
    double *P, *P_old, *P_temp, *w, *nabla, *d_dummy_mm;
    double *alpha_m_temp, *alpha_old, *alpha, *alpha_temp;
    
-   P = Calloc(ndata, double);
-   P_old = Calloc(ndata, double);
-   P_temp = Calloc(ndata, double);
-   w = Calloc(ndata, double);
+   P = R_Calloc(ndata, double);
+   P_old = R_Calloc(ndata, double);
+   P_temp = R_Calloc(ndata, double);
+   w = R_Calloc(ndata, double);
    
-   nabla = Calloc(mm, double);
-   alpha_m_temp = Calloc(mm, double);
-   alpha_old = Calloc(mm, double);
-   alpha = Calloc(mm, double);
-   alpha_temp = Calloc(mm, double);
+   nabla = R_Calloc(mm, double);
+   alpha_m_temp = R_Calloc(mm, double);
+   alpha_old = R_Calloc(mm, double);
+   alpha = R_Calloc(mm, double);
+   alpha_temp = R_Calloc(mm, double);
    
    /* dummy variables, allocated here so that they aren't allocated and freed inside a loop */
-   i_dummy_mm = Calloc(mm, int); /* dummy vector of integers of length mm */
-   i_dummy_2mm = Calloc(2*mm, int); /* dummy vector of integers of length 2*mm */
-   d_dummy_mm = Calloc(mm, double); /* dummy vector of doubles of length mm */
+   i_dummy_mm = R_Calloc(mm, int); /* dummy vector of integers of length mm */
+   i_dummy_2mm = R_Calloc(2*mm, int); /* dummy vector of integers of length 2*mm */
+   d_dummy_mm = R_Calloc(mm, double); /* dummy vector of doubles of length mm */
    iteration_inner = 0;
    iteration_outer = 0;
    eps = 0.1;
@@ -904,18 +904,18 @@ void MLE_IQM(int ndata, SCanonRect *R, int mm, SIntPoint *tt,
    *sum_alpha = sum;
    *converged = !FenchelViol(m,ind,mm,nabla,tol,&indexmin,&partialsum,&norm);
    
-   Free(P);
-   Free(P_old);
-   Free(P_temp);
-   Free(w);
-   Free(nabla);
-   Free(alpha_m_temp);
-   Free(alpha_old);
-   Free(alpha);
-   Free(alpha_temp);
-   Free(i_dummy_mm);
-   Free(i_dummy_2mm);
-   Free(d_dummy_mm);
+   R_Free(P);
+   R_Free(P_old);
+   R_Free(P_temp);
+   R_Free(w);
+   R_Free(nabla);
+   R_Free(alpha_m_temp);
+   R_Free(alpha_old);
+   R_Free(alpha);
+   R_Free(alpha_temp);
+   R_Free(i_dummy_mm);
+   R_Free(i_dummy_2mm);
+   R_Free(d_dummy_mm);
 }
 
 SEXP ComputeMLEForR(SEXP RR, SEXP BB, SEXP MaxIterInner, SEXP MaxIterOuter, SEXP tol)
@@ -944,10 +944,10 @@ SEXP ComputeMLEForR(SEXP RR, SEXP BB, SEXP MaxIterInner, SEXP MaxIterOuter, SEXP
    /* CanonMaxIntersections will be allocated in HeightMapAlgorithmCanonical */
    
    /* Allocate space */
-   SCanonRect *CanonObsRectangles = Calloc(n, SCanonRect);
-   int *rx = Calloc(2*n, int);
-   int *ry = Calloc(2*n, int);
-   int *lb = Calloc(2*n, int);
+   SCanonRect *CanonObsRectangles = R_Calloc(n, SCanonRect);
+   int *rx = R_Calloc(2*n, int);
+   int *ry = R_Calloc(2*n, int);
+   int *lb = R_Calloc(2*n, int);
    
    VerifyInputRectangles(RR, BB);
    
@@ -957,10 +957,10 @@ SEXP ComputeMLEForR(SEXP RR, SEXP BB, SEXP MaxIterInner, SEXP MaxIterOuter, SEXP
    HeightMapAlgorithmCanonical(n,CanonObsRectangles,rx,lb,&CanonMaxIntersections,&mm);
    
    /* Allocate space for input and output of optimization step */
-   tt = Calloc(mm, SIntPoint);
-   t = Calloc(mm, SIntPoint);
-   ind = Calloc(mm, int); 
-   alpha = Calloc(mm, double);
+   tt = R_Calloc(mm, SIntPoint);
+   t = R_Calloc(mm, SIntPoint);
+   ind = R_Calloc(mm, int); 
+   alpha = R_Calloc(mm, double);
    
    /* Copy upper right corners of maximal intersections into the array tt. 
    * (It is sufficient to only consider the upper right corners for the 
@@ -1034,15 +1034,15 @@ SEXP ComputeMLEForR(SEXP RR, SEXP BB, SEXP MaxIterInner, SEXP MaxIterOuter, SEXP
    
    setAttrib(Ans,R_NamesSymbol,ListNames); /* attach vector names */
    
-   Free(CanonObsRectangles);
-   Free(CanonMaxIntersections);
-   Free(rx);
-   Free(ry);
-   Free(lb);
-   Free(tt);
-   Free(t);
-   Free(ind);
-   Free(alpha);
+   R_Free(CanonObsRectangles);
+   R_Free(CanonMaxIntersections);
+   R_Free(rx);
+   R_Free(ry);
+   R_Free(lb);
+   R_Free(tt);
+   R_Free(t);
+   R_Free(ind);
+   R_Free(alpha);
    
    UNPROTECT(numprotected);
    

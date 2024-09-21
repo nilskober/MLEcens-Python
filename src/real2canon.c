@@ -23,9 +23,9 @@ SEXP RealToCanonicalForR(SEXP RR, SEXP BB)
    int    *pBB = INTEGER(BB);
    int    BBexplicit;	/* equals 1 if boundary matrix BB is given explicitly */
 
-   SEndPoint  *XEndPoints = Calloc(2*n, SEndPoint);
-   SEndPoint  *YEndPoints = Calloc(2*n, SEndPoint);
-   int        *BBvalue    = Calloc(4, int);   
+   SEndPoint  *XEndPoints = R_Calloc(2*n, SEndPoint);
+   SEndPoint  *YEndPoints = R_Calloc(2*n, SEndPoint);
+   int        *BBvalue    = R_Calloc(4, int);   
    /* BBvalue is used when boundary matrix BB is not given explicitly */
 
    VerifyInputRectangles(RR,BB);
@@ -108,9 +108,9 @@ SEXP RealToCanonicalForR(SEXP RR, SEXP BB)
          pAns[YEndPoints[i].index + 3*n] = i+1;
    }
 
-   Free(XEndPoints);
-   Free(YEndPoints);
-   Free(BBvalue);
+   R_Free(XEndPoints);
+   R_Free(YEndPoints);
+   R_Free(BBvalue);
 
    UNPROTECT(numprotected);
    return Ans;

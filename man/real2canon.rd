@@ -6,8 +6,8 @@
       rectangles R1',..,Rn' with the following properties:
       (1) R1',..Rn' have the same intersection structure as the original rectangles, i.e., 
       Ri' and Rj' intersect if and only if Ri and Rj intersect.
-      (2) All x-coordinates of R1',..,Rn' are distinct, and take values in {1,..,2n}.
-      (3) All y-coordinates of R1',..,Rn' are distinct, and take values in {1,..,2n}.
+      (2) All x-coordinates of R1',..,Rn' are distinct, and take values in \{1,..,2n\}.
+      (3) All y-coordinates of R1',..,Rn' are distinct, and take values in \{1,..,2n\}.
 
       The function \code{\link{real2canon}} performs the inverse operation of the function 
       \code{\link{canon2real}}.

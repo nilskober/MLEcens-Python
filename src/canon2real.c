@@ -24,9 +24,9 @@ SEXP CanonicalToRealForR(SEXP InputRects, SEXP RR, SEXP BB)
    double *pRR         = REAL(RR);
    int    *pBB         = INTEGER(BB);
  
-   SEndPoint *XEndPoints = Calloc(2*n, SEndPoint);
-   SEndPoint *YEndPoints = Calloc(2*n, SEndPoint);
-   int       *BBvalue    = Calloc(4, int);
+   SEndPoint *XEndPoints = R_Calloc(2*n, SEndPoint);
+   SEndPoint *YEndPoints = R_Calloc(2*n, SEndPoint);
+   int       *BBvalue    = R_Calloc(4, int);
 
    VerifyInputCanonicalRectangles(InputRects, RR, BB);
 
@@ -129,9 +129,9 @@ SEXP CanonicalToRealForR(SEXP InputRects, SEXP RR, SEXP BB)
    
    setAttrib(Ans,R_NamesSymbol,ListNames);   /* attach vector names */
 
-   Free(XEndPoints);
-   Free(YEndPoints);
-   Free(BBvalue);
+   R_Free(XEndPoints);
+   R_Free(YEndPoints);
+   R_Free(BBvalue);
 
    UNPROTECT(numprotected);
 
